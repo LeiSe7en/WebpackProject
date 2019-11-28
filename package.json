@@ -1,0 +1,19 @@
+{
+  "name": "mywebpack",
+  "version": "1.0.0",
+  "description": "A webpack project from scratch",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LeiSe7en/MyWebpack.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LeiSe7en/MyWebpack/issues"
+  },
+  "homepage": "https://github.com/LeiSe7en/MyWebpack#readme"
+}
