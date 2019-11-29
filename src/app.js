@@ -1,2 +1,2 @@
-const ss = require('./people.js')
-alert(ss)
+import css from  '../static/styles/main.css'
+console.log(require('./people.js'))

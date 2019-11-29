@@ -1,1 +1,1 @@
-module.exports = 'Hello People'
+module.exports = 'Hello Webpack Nelson'
