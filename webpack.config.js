@@ -1,4 +1,6 @@
 var path = require('path')
+var WebpackBundleAnalyzer = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+
 module.exports = {
 	entry: './src/app.js',
 	mode: 'development',
@@ -8,7 +10,14 @@ module.exports = {
 	},
 	devServer: {
 		port: 9000,
-		compress: true
+		compress: true,
+		stats: {
+			chuncks: false,
+			assets: true,
+			children: false,
+			chunkModules: false,
+			modules: false
+		}
 	},
 	module: {
 		rules: [
@@ -16,5 +25,8 @@ module.exports = {
 				test: /\.css$/, loader: 'style-loader!css-loader'
 			}
 		]
-	}
+	},
+	plugins:[
+		new WebpackBundleAnalyzer()
+	]
 }
