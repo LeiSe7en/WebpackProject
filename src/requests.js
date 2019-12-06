@@ -1,4 +1,4 @@
-const axios = require('axios')
+const axios = require('./plugins/axios').default
 const fetchComments = function () {
 	return axios.get('https://jsonplaceholder.typicode.com/comments?_page=1')
 }
