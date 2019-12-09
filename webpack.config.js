@@ -9,7 +9,7 @@ module.exports = {
 	output: {
 		path: path.join(__dirname, 'dist'),
 		filename: (chunkData) => {
-      return '[chunkhash].js'
+      return '[name].[hash].js'
     }
 		// chunkFilename: '[name].chunk.js'
 	},
@@ -40,13 +40,13 @@ module.exports = {
       automaticNameDelimiter: '~',
       automaticNameMaxLength: 30,
       cacheGroups: {
-        // vendor: {
-        //   test: /[\\/]node_modules[\\/]/,
-        //   priority: 10,
-        //   filename: '[hash].js',
-        //   minChunks: 1,
-        //   chunks: 'initial'
-        // },
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          priority: 10,
+          filename: 'vendor.[hash].js',
+          minChunks: 1,
+          chunks: 'initial'
+        },
         axios: {
         	test: function (module) {
         		// module.context 就是每一个项目中文件夹，注意是每一个也就是每一个路径都会传入这个方法
@@ -61,29 +61,29 @@ module.exports = {
         		return /axios/.test(module.context)
         	},
         	minChunks: 1,
-        	priority: 10,
-        	filename: '[hash].js',
+        	priority: 11,
+        	filename: 'vendor.[hash].js',
         	chunks: 'all'
         },
-        jquery: {
-        	test: function (module) {
-        		// module.context 就是每一个项目中文件夹，注意是每一个也就是每一个路径都会传入这个方法
-        		// ...
-        		// /Users/caolei/Documents/Nelson/MyWebpack/node_modules/axios/lib/core
-						// /Users/caolei/Documents/Nelson/MyWebpack/node_modules/axios/lib/helpers
-            // /Users/caolei/Documents/Nelson/MyWebpack/node_modules/axios/lib/core
-            // /Users/caolei/Documents/Nelson/MyWebpack/node_modules/axios/lib/core
-            // /Users/caolei/Documents/Nelson/MyWebpack/node_modules/axios/lib/core
-            // /Users/caolei/Documents/Nelson/MyWebpack/node_modules/axios/lib/cancel
-            // ...
-            console.log(/jquery/.test(module.context))
-        		return /jquery/.test(module.context)
-        	},
-        	minChunks: 1,
-        	priority: 10,
-        	filename: 'jquery.[hash].js',
-        	chunks: 'all'
-        },
+      //   jquery: {
+      //   	test: function (module) {
+      //   		// module.context 就是每一个项目中文件夹，注意是每一个也就是每一个路径都会传入这个方法
+      //   		// ...
+      //   		// /Users/caolei/Documents/Nelson/MyWebpack/node_modules/axios/lib/core
+						// // /Users/caolei/Documents/Nelson/MyWebpack/node_modules/axios/lib/helpers
+      //       // /Users/caolei/Documents/Nelson/MyWebpack/node_modules/axios/lib/core
+      //       // /Users/caolei/Documents/Nelson/MyWebpack/node_modules/axios/lib/core
+      //       // /Users/caolei/Documents/Nelson/MyWebpack/node_modules/axios/lib/core
+      //       // /Users/caolei/Documents/Nelson/MyWebpack/node_modules/axios/lib/cancel
+      //       // ...
+      //       console.log(/jquery/.test(module.context))
+      //   		return /jquery/.test(module.context)
+      //   	},
+      //   	minChunks: 1,
+      //   	priority: 10,
+      //   	filename: 'jquery.[hash].js',
+      //   	chunks: 'all'
+      //   },
         default: {
           minChunks: 2,
           priority: -20,
