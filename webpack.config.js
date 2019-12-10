@@ -1,15 +1,22 @@
 var path = require('path')
 var webpack = require('webpack')
 var WebpackBundleAnalyzer = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+var MiniCssExtractPlugin = require('mini-css-extract-plugin')
+var HTMLWebpackPlugin = require('html-webpack-plugin')
 module.exports = {
 	entry: {
-		app: './src/app.js'
+		app: './src/app.js',
+    people: './src/people.js'
 	},
-	mode: 'production',
+	mode: 'development',
+  stats: {
+    modules: false,
+    entrypoints: false
+  },
 	output: {
 		path: path.join(__dirname, 'dist'),
 		filename: (chunkData) => {
-      return '[name].[hash].js'
+      return '[name].js'
     }
 		// chunkFilename: '[name].chunk.js'
 	},
@@ -26,45 +33,56 @@ module.exports = {
 	module: {
 		rules: [
 			{
-				test: /\.css$/, loader: 'style-loader!css-loader'
+				test: /\.css$/, 
+        use: [
+          MiniCssExtractPlugin.loader,
+          "css-loader"
+        ]
 			}
 		]
 	},
 	optimization: {
+    runtimeChunk: {
+      name: entrypoint => `runtimechunk~${entrypoint.name}`
+    },
     splitChunks: {
+      chunks: 'all',
       minSize: 30000,
       maxSize: 0,
-      minChunks: 1,
-      maxAsyncRequests: 6,
-      maxInitialRequests: 4,
+      minChunks: 2,
+      maxAsyncRequests: 5,
+      maxInitialRequests: 3,
       automaticNameDelimiter: '~',
-      automaticNameMaxLength: 30,
+      name: true,
       cacheGroups: {
-        vendor: {
+        vendors: {
           test: /[\\/]node_modules[\\/]/,
-          priority: 10,
-          filename: 'vendor.[hash].js',
-          minChunks: 1,
-          chunks: 'initial'
+          priority: -10,
+          minChunks: 1
         },
-        axios: {
-        	test: function (module) {
-        		// module.context 就是每一个项目中文件夹，注意是每一个也就是每一个路径都会传入这个方法
-        		// ...
-        		// /Users/caolei/Documents/Nelson/MyWebpack/node_modules/axios/lib/core
-						// /Users/caolei/Documents/Nelson/MyWebpack/node_modules/axios/lib/helpers
-            // /Users/caolei/Documents/Nelson/MyWebpack/node_modules/axios/lib/core
-            // /Users/caolei/Documents/Nelson/MyWebpack/node_modules/axios/lib/core
-            // /Users/caolei/Documents/Nelson/MyWebpack/node_modules/axios/lib/core
-            // /Users/caolei/Documents/Nelson/MyWebpack/node_modules/axios/lib/cancel
-            // ...
-        		return /axios/.test(module.context)
-        	},
-        	minChunks: 1,
-        	priority: 11,
-        	filename: 'vendor.[hash].js',
-        	chunks: 'all'
-        },
+        // styles: {
+        //   test: /\.css$/,
+        //   chunks: 'all',
+        //   enforce: true
+        // },
+      //   axios: {
+      //   	test: function (module) {
+      //   		// module.context 就是每一个项目中文件夹，注意是每一个也就是每一个路径都会传入这个方法
+      //   		// ...
+      //   		// /Users/caolei/Documents/Nelson/MyWebpack/node_modules/axios/lib/core
+						// // /Users/caolei/Documents/Nelson/MyWebpack/node_modules/axios/lib/helpers
+      //       // /Users/caolei/Documents/Nelson/MyWebpack/node_modules/axios/lib/core
+      //       // /Users/caolei/Documents/Nelson/MyWebpack/node_modules/axios/lib/core
+      //       // /Users/caolei/Documents/Nelson/MyWebpack/node_modules/axios/lib/core
+      //       // /Users/caolei/Documents/Nelson/MyWebpack/node_modules/axios/lib/cancel
+      //       // ...
+      //   		return /axios/.test(module.context)
+      //   	},
+      //   	minChunks: 1,
+      //   	priority: 11,
+      //   	filename: 'vendor.[hash].js',
+      //   	chunks: 'all'
+      //   },
       //   jquery: {
       //   	test: function (module) {
       //   		// module.context 就是每一个项目中文件夹，注意是每一个也就是每一个路径都会传入这个方法
@@ -93,6 +111,13 @@ module.exports = {
     }
   },
 	plugins:[
-		// new WebpackBundleAnalyzer()
+    new MiniCssExtractPlugin({
+      filename: 'styles/[name].css',
+      chunkFilename: "styles/[name].css"
+    }),
+		// new WebpackBundleAnalyzer(),
+    new HTMLWebpackPlugin({
+      template: 'index.html'
+    })
 	]
 }
