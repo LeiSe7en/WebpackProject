@@ -22,7 +22,7 @@ import Requests from './requests'
 new PageModel({
   el: 'app',
   data: {
-    color: '#ccc'
+    color: 'yellow'
   }
 })
 

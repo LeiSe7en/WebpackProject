@@ -9,7 +9,7 @@ export default class Dep {
   }
   depend (watcher) {
   }
-  notify (vm) {
-    this.subs.forEach(sub => sub.update(vm))
+  notify (vm, newValue) {
+    this.subs.forEach(sub => sub.update(vm, newValue))
   }
 }

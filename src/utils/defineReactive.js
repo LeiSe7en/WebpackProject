@@ -22,7 +22,7 @@ export default function defineReactive (vm, obj, key, val) {
       console.log(`Setter be called ${key}`)
       if (val == newValue) return false
       val = newValue
-      dep.notify(vm)
+      dep.notify(vm, newValue)
     }
   })
 }

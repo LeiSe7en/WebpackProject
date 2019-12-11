@@ -1,5 +1,5 @@
 export default class RenderService {
-  update (vm) {
-    vm._render(vm)
+  update (vm, newValue) {
+    vm._render(newValue)
   }
 }

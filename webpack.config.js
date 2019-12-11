@@ -29,12 +29,7 @@ module.exports = {
 		overlay: true,
 		hot: true,
 		publicPath: '/',
-		stats: {
-			assets: true,
-			children: false,
-			chunkModules: false,
-			modules: false
-		}
+		stats: 'errors-only'
 	},
   resolve: {
     alias: {
