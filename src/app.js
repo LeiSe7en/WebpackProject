@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 // import css from  '../static/styles/main.css'
 // import ComponentService from '@/services/ComponentService'
 // const run = function (componentService) {
@@ -17,9 +16,9 @@ import PageModel from './PageModel'
 import css from  '../static/styles/main.css'
 import $ from 'jquery'
 import Requests from './requests'
-import ('./requests').then(module => {
-  console.log(module)
-})
+// import ('./requests').then(module => {
+//   console.log(module)
+// })
 new PageModel({
   el: 'app',
   data: {

@@ -36,6 +36,11 @@ module.exports = {
 			modules: false
 		}
 	},
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, 'src')
+    }
+  },
 	module: {
 		rules: [
 			{
@@ -142,7 +147,7 @@ module.exports = {
     }
   },
 	plugins: [
-		new HtmlWebpackPlugin({
+		new HTMLWebpackPlugin({
 			template: 'index.html'
 		}),
 		new CleanWebpackPlugin(),
@@ -151,8 +156,5 @@ module.exports = {
       chunkFilename: "styles/[name].css"
     }),
     // new WebpackBundleAnalyzer(),
-    new HTMLWebpackPlugin({
-      template: 'index.html'
-    })
 	]
 }
