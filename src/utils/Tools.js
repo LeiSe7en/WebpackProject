@@ -1,3 +1,5 @@
+// https://codeburst.io/throttling-and-debouncing-in-javascript-b01cad5c8edf
+
 export default class Tools {
 	static throttle (fun, delay) {
 		let inThrottle
