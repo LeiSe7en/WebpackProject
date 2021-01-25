@@ -48,9 +48,10 @@ module.exports = {
 			{
 				test: /\.js$/,
 				exclude: '/node_modules/',
-				use: {
-					loader: 'babel-loader'
-				}
+				use: [
+          path.resolve(__dirname, 'src/loaders/testLoader.js'),
+          'babel-loader'
+        ]
 			},
 			{
 				test: /\.html$/,
